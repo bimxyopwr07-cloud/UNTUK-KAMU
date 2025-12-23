@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Untuk Kamu 🤍</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#6a00ff,#b84bff,#ff8fd1);
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+overflow:hidden;
+transition:.6s;
+}
+body.dark{
+background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+}
+
+.screen{
+display:none;
+width:90%;
+max-width:430px;
+background:rgba(255,255,255,.15);
+padding:30px;
+border-radius:22px;
+backdrop-filter:blur(12px);
+box-shadow:0 15px 40px rgba(0,0,0,.3);
+animation:fade .6s ease;
+text-align:center;
+}
+.screen.active{display:block}
+
+h1{font-size:24px;margin-bottom:15px}
+p{font-size:15px;line-height:1.9}
+
+button{
+width:100%;
+margin-top:15px;
+padding:12px;
+border:none;
+border-radius:14px;
+background:white;
+color:#ff4f8b;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+button:hover{background:#ff4f8b;color:white}
+
+.input{
+width:100%;
+padding:12px;
+border-radius:14px;
+border:none;
+margin-top:10px;
+font-size:15px;
+text-align:center;
+}
+
+.music{
+position:fixed;
+bottom:15px;
+right:15px;
+background:white;
+color:#ff4f8b;
+border-radius:50%;
+width:45px;
+height:45px;
+font-size:18px;
+border:none;
+}
+
+.slider{
+display:flex;
+overflow-x:auto;
+gap:12px;
+scroll-snap-type:x mandatory;
+margin:15px 0;
+}
+.slider img{
+width:100%;
+max-width:260px;
+border-radius:18px;
+scroll-snap-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.chat{
+background:#0b141a;
+border-radius:18px;
+padding:15px;
+text-align:left;
+font-size:14px;
+line-height:1.7;
+}
+.bubble{
+max-width:80%;
+padding:10px 14px;
+border-radius:15px;
+margin-bottom:10px;
+}
+.me{
+background:#005c4b;
+margin-left:auto;
+border-bottom-right-radius:5px;
+}
+.time{
+font-size:11px;
+opacity:.6;
+margin-top:4px;
+text-align:right;
+}
+
+#loveBig{
+font-size:30px;
+margin-top:20px;
+opacity:0;
+animation:showLove 1.5s ease forwards;
+animation-delay:6s;
+}
+
+@keyframes showLove{
+from{opacity:0;transform:scale(.8)}
+to{opacity:1;transform:scale(1)}
+}
+@keyframes fade{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body onclick="autoPlayMusic()">
+
+<audio id="bgm" loop>
+<source src="for you.mp3" type="audio/mpeg">
+</audio>
+<button class="music" onclick="toggleMusic()">🎵</button>
+
+<!-- LOGIN -->
+<div class="screen active" id="login">
+<h1>🔐 Untuk Kamu</h1>
+<p>
+Masukin nama kamu ya…<br>
+aku pengen yakin<br>
+ini beneran kamu 🤍
+</p>
+<input id="loginName" class="input" placeholder="Nama kamu...">
+<button onclick="login()">Masuk 💞</button>
+</div>
+
+<!-- MENU -->
+<div class="screen" id="menu">
+<h1>💖 Cerita Kita</h1>
+<button onclick="go('kangen')">Tentang Kangen 😔</button>
+<button onclick="go('senyum')">Tentang Senyum 😆</button>
+<button onclick="go('sayang')">Tentang Sayang 🥰</button>
+<button onclick="go('lelah')">Saat Kamu Lelah 🫂</button>
+<button onclick="go('doa')">Doaku Untukmu 🤲</button>
+<button onclick="go('janji')">Janji Kecil 🤍</button>
+<button onclick="go('masa')">Masa Depan 🌙</button>
+<button onclick="go('fakewa')">Pesan yang Gak Terkirim 💬</button>
+<button onclick="go('lock')">Buka Rahasia 🔐</button>
+</div>
+
+<!-- KANGEN -->
+<div class="screen" id="kangen">
+<h1>😔 Tentang Kangen</h1>
+<p>
+Kangen itu gak pernah ribut.<br><br>
+Dia datang pelan-pelan,<br>
+pas aku pengen cerita tapi gak tau harus ke siapa,<br>
+pas aku buka HP berharap namamu muncul.<br><br>
+Aku kangen caramu nenangin,<br>
+kangen caramu peduli tanpa banyak kata.<br><br>
+Dan jujur…<br>
+kangen itu selalu berujung ke kamu.
+</p>
+<button onclick="go('menu')">Balik 💞</button>
+</div>
+
+<!-- SENYUM -->
+<div class="screen" id="senyum">
+<h1>😆 Tentang Senyum</h1>
+<p>
+Senyum kamu itu hal kecil<br>
+yang sering kamu anggap biasa.<br><br>
+Padahal buat aku,<br>
+itu alasan buat bertahan satu hari lagi.<br><br>
+Kalau kamu tau betapa berharganya senyum itu,<br>
+mungkin kamu bakal lebih sering jagainnya.
+</p>
+<button onclick="go('menu')">Balik 💞</button>
+</div>
+
+<!-- SAYANG -->
+<div class="screen" id="sayang">
+<h1>🥰 Tentang Sayang</h1>
+<p>
+Aku sayang kamu bukan karena kebiasaan.<br><br>
+Aku sayang kamu karena aku kenal<br>
+kurangmu, capekmu, diemmu.<br><br>
+Dan anehnya,<br>
+aku tetap mau tinggal.<br><br>
+Karena hatiku milih kamu.
+</p>
+<button onclick="go('menu')">Balik 💞</button>
+</div>
+
+<!-- LELAH -->
+<div class="screen" id="lelah">
+<h1>🫂 Saat Kamu Lelah</h1>
+<p>
+Kalau kamu lagi capek sama dunia,<br>
+aku mau jadi tempat kamu berhenti sebentar.<br><br>
+Kamu gak harus kuat,<br>
+gak harus baik-baik aja.<br><br>
+Kalau mau nangis,<br>
+aku dengerin.<br>
+Kalau mau diem,<br>
+aku temenin.
+</p>
+<button onclick="go('menu')">Balik 💞</button>
+</div>
+
+<!-- DOA -->
+<div class="screen" id="doa">
+<h1>🤲 Doaku</h1>
+<p>
+Aku sering nyebut nama kamu<br>
+di doa-doa yang gak pernah kamu tau.<br><br>
+Aku minta kamu dijagain,<br>
+hatimu ditenangin,<br>
+langkahmu dimudahin.<br><br>
+Jangan pernah ngerasa sendirian ya…
+</p>
+<button onclick="go('menu')">Balik 💞</button>
+</div>
+
+<!-- JANJI -->
+<div class="screen" id="janji">
+<h1>🤍 Janji Kecil</h1>
+<p>
+Aku gak janji selalu sempurna.<br><br>
+Tapi aku janji mau belajar,<br>
+mau dengerin,<br>
+dan gak lari pas keadaan berat.<br><br>
+Selama kamu mau berjuang,<br>
+aku juga mau.
+</p>
+<button onclick="go('menu')">Balik 💞</button>
+</div>
+
+<!-- MASA DEPAN -->
+<div class="screen" id="masa">
+<h1>🌙 Masa Depan</h1>
+<p>
+Aku gak tau masa depan bakal kayak gimana.<br><br>
+Tapi satu hal yang aku tau,<br>
+aku pengen semua rencana itu<br>
+ada kamu di dalamnya.<br><br>
+Pelan-pelan gak apa-apa,<br>
+asal bareng.
+</p>
+<button onclick="go('menu')">Balik 💞</button>
+</div>
+
+<!-- FAKE WA -->
+<div class="screen" id="fakewa">
+<h1>💬 Pesan yang Gak Pernah Aku Kirim</h1>
+<div class="chat">
+<div class="bubble me">Aku harap hari kamu baik 🤍<div class="time">22:41</div></div>
+<div class="bubble me">Kadang aku pengen cerita,<br>tapi takut kamu capek<div class="time">22:42</div></div>
+<div class="bubble me">Kalau aku diem,<br>bukan berarti aku pergi<div class="time">22:43</div></div>
+<div class="bubble me">Aku cuma lagi berjuang sendiri<br>supaya bisa tetap sama kamu<div class="time">22:44</div></div>
+</div>
+<button onclick="go('menu')">Balik 💞</button>
+</div>
+
+<!-- PASSWORD -->
+<div class="screen" id="lock">
+<h1>🔐 Rahasia</h1>
+<p>
+Masukin tanggal lahir aku<br>
+biar kamu bisa liat<br>
+perasaan paling jujurku 🤍
+</p>
+<input id="birthInput" class="input" placeholder="DDMMYYYY">
+<button onclick="unlock()">Buka 🤍</button>
+<button onclick="go('menu')">Balik</button>
+</div>
+
+<!-- ENDING -->
+<div class="screen" id="ending">
+<h1>💞 Aku Pilih Kamu</h1>
+<div class="slider">
+<img src="I.jpeg">
+<img src="LOVE.jpeg">
+<img src="YOU.jpeg">
+</div>
+<p id="typeText"></p>
+<h2 id="loveBig">I LOVE YOU 🤍</h2>
+<button onclick="go('menu')">Balik Lagi 🥹</button>
+</div>
+
+<script>
+let musicPlayed=false;
+let darkMode=false;
+
+function autoPlayMusic(){
+if(!musicPlayed){
+document.getElementById("bgm").play();
+musicPlayed=true;
+}
+}
+function toggleMusic(){
+const m=document.getElementById("bgm");
+m.paused?m.play():m.pause();
+}
+function go(id){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+darkMode=!darkMode;
+document.body.classList.toggle("dark",darkMode);
+if(id==="ending"){
+document.getElementById("typeText").innerHTML="";
+i=0;typeWriter();
+}
+}
+function login(){
+const name=document.getElementById("loginName").value.toLowerCase();
+if(name==="manda"){go("menu")}
+else{alert("Nama salah 🤍")}
+}
+const BIRTH_PASSWORD="190407";
+function unlock(){
+if(document.getElementById("birthInput").value===BIRTH_PASSWORD){
+go("ending")
+}else{alert("Salah 🤍")}
+}
+const text=`Dari semua kemungkinan yang ada,
+aku tetap milih kamu.
+
+Bukan karena kamu paling sempurna,
+tapi karena sama kamu
+aku ngerasa pulang.
+
+Kalau nanti jalannya panjang,
+aku mau jalan bareng kamu 🤍`;
+let i=0;
+function typeWriter(){
+if(i<text.length){
+document.getElementById("typeText").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typeWriter,45);
+}
+}
+</script>
+
+</body>
+</html>
